@@ -4,7 +4,7 @@ from telebot.types import ReplyKeyboardMarkup, KeyboardButton
 
 # 🔹 Configurar las claves de API (Reemplázalas con tus valores reales)
 TELEGRAM_TOKEN = "7698297231:AAFYCNpxACW7bHFvErdA5NVNGZqBsEdJb-E"
-TOGETHER_AI_KEY = "sk-123456789abcdefg"  # API Key de Together AI
+TOGETHER_AI_KEY = "d2da8540307f65c3738f26ac4d671b19f59a9b0fabcd6b9211f327ad88bd264e"  # API Key de Together AI
 
 bot = telebot.TeleBot(TELEGRAM_TOKEN)
 
