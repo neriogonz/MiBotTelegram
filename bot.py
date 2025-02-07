@@ -15,18 +15,18 @@ def mistral_response(prompt):
         "Authorization": f"Bearer d2da8540307f65c3738f26ac4d671b19f59a9b0fabcd6b9211f327ad88bd264e",
         "Content-Type": "application/json"
     }
-    data = {
-        "model": "mistralai/Mistral-7B-Instruct-v0.1",
-        "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 200
-    }
-    
-    try:
-        response = requests.post(url, json=data, headers=headers)
-        response_data = response.json()
-        return response_data["choices"][0]["message"]["content"]
-    except Exception:
-        return "😕 Ocurrió un error al procesar tu solicitud. Inténtalo más tarde."
+data = {
+    "model": "mistralai/Mistral-7B-Instruct-v0.1",
+    "messages": [{"role": "user", "content": prompt}],
+    "max_tokens": 200
+}
+
+try:
+    response = requests.post(url, json=data, headers=headers)
+    response_data = response.json()
+    return response_data["choices"][0]["message"]["content"]
+except Exception:
+    return "😕 Ocurrió un error al procesar tu solicitud. Inténtalo más tarde."
 
 # 🔹 Generar botones de opciones
 def menu_principal():
@@ -43,7 +43,7 @@ def menu_principal():
 @bot.message_handler(commands=['start'])
 def start_message(message):
     bot.send_message(message.chat.id, 
-                     "👋 ¡Hola! Soy un bot de inteligencia artificial gratis. 🚀\n\n"
+                     "👋 ¡Hola! Soy **Nerio - Tu Aliado Inteligente 🚀**.\n\n"
                      "💡 Envíame cualquier pregunta y te responderé usando IA.\n\n"
                      "🔹 **Elige una opción para comenzar:**", 
                      reply_markup=menu_principal())
@@ -51,7 +51,7 @@ def start_message(message):
 # 🔹 Comando /help
 @bot.message_handler(commands=['help'])
 def help_message(message):
-    bot.reply_to(message, "📝 **Cómo usar el bot:**\n\n"
+    bot.reply_to(message, "📝 **Cómo usar Nerio - Tu Aliado Inteligente 🚀:**\n\n"
                           "💡 Simplemente elige una opción del menú o envíame una pregunta y te responderé con IA.\n\n"
                           "Ejemplos:\n"
                           "🔹 ¿Qué es la inteligencia artificial?\n"
@@ -63,7 +63,7 @@ def help_message(message):
 @bot.message_handler(commands=['info'])
 def info_message(message):
     bot.reply_to(message, "🤖 **Sobre mí:**\n"
-                          "Soy un bot de inteligencia artificial basado en **Mistral 7B**, un modelo de IA optimizado para respuestas rápidas y precisas.\n\n"
+                          "Soy **Nerio - Tu Aliado Inteligente 🚀**, un bot de inteligencia artificial basado en **Mistral 7B**.\n\n"
                           "🧠 **Modelo:** Mistral 7B\n"
                           "📡 **Fuente:** Together AI\n"
                           "💡 **Gratis para uso público**\n\n"
@@ -88,7 +88,7 @@ def handle_buttons(message):
                          "🔹 Pide explicaciones paso a paso.\n"
                          "🔹 Usa la IA para aprender nuevas cosas. 🚀")
     elif message.text == "🚀 Probar la IA con una pregunta":
-        bot.send_message(message.chat.id, "Escríbeme cualquier pregunta y te responderé con IA. 😊")
+        bot.send_message(message.chat.id, "✍️ Escríbeme cualquier pregunta y te responderé con IA. 😊")
 
 # 🔹 Manejo de mensajes normales (Modo conversación)
 @bot.message_handler(func=lambda message: True)
@@ -98,3 +98,4 @@ def chat_with_mistral(message):
 
 # 🔹 Mantener el bot activo
 bot.polling()
+
