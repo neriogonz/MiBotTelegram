@@ -12,21 +12,21 @@ bot = telebot.TeleBot(TELEGRAM_TOKEN)
 def mistral_response(prompt):
     url = "https://api.together.ai/v1/chat/completions"
     headers = {
-        "Authorization": f"Bearer d2da8540307f65c3738f26ac4d671b19f59a9b0fabcd6b9211f327ad88bd264e",
+        "Authorization": f"Bearer {TOGETHER_AI_KEY}",
         "Content-Type": "application/json"
     }
-data = {
-    "model": "mistralai/Mistral-7B-Instruct-v0.1",
-    "messages": [{"role": "user", "content": prompt}],
-    "max_tokens": 200
-}
+    data = {
+        "model": "mistralai/Mistral-7B-Instruct-v0.1",
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 200
+    }
 
-try:
-    response = requests.post(url, json=data, headers=headers)
-    response_data = response.json()
-    return response_data["choices"][0]["message"]["content"]
-except Exception:
-    return "😕 Ocurrió un error al procesar tu solicitud. Inténtalo más tarde."
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        response_data = response.json()
+        return response_data["choices"][0]["message"]["content"]
+    except Exception:
+        return "😕 Ocurrió un error al procesar tu solicitud. Inténtalo más tarde."
 
 # 🔹 Generar botones de opciones
 def menu_principal():
@@ -70,7 +70,12 @@ def info_message(message):
                           "💬 Envíame cualquier pregunta y te responderé.")
 
 # 🔹 Responder a los botones del menú
-@bot.message_handler(func=lambda message: message.text in ["🤖 ¿Qué es la Inteligencia Artificial?", "📚 ¿Cómo funciona el bot?", "💡 Consejos para usar IA", "🚀 Probar la IA con una pregunta"])
+@bot.message_handler(func=lambda message: message.text in [
+    "🤖 ¿Qué es la Inteligencia Artificial?",
+    "📚 ¿Cómo funciona el bot?",
+    "💡 Consejos para usar IA",
+    "🚀 Probar la IA con una pregunta"
+])
 def handle_buttons(message):
     if message.text == "🤖 ¿Qué es la Inteligencia Artificial?":
         bot.send_message(message.chat.id, 
@@ -98,4 +103,3 @@ def chat_with_mistral(message):
 
 # 🔹 Mantener el bot activo
 bot.polling()
-
